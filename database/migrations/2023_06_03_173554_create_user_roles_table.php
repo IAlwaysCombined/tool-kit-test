@@ -11,17 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('client_roles', function (Blueprint $table) {
+        Schema::create('user_roles', function (Blueprint $table) {
             $table->id();
             $table->foreignId('role_id')
                 ->nullable()
                 ->references('id')
                 ->on('roles')
                 ->onDelete('cascade');
-            $table->foreignId('client_id')
+            $table->foreignId('user_id')
                 ->nullable()
                 ->references('id')
-                ->on('clients')
+                ->on('users')
                 ->onDelete('cascade');
             $table->timestamps();
         });
@@ -32,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('client_roles');
+        Schema::dropIfExists('user_roles');
     }
 };
