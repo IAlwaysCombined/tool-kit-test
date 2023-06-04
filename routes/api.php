@@ -4,6 +4,7 @@ use App\Http\Controllers\V1\Auth\AuthController;
 use App\Http\Controllers\V1\Auth\LogoutController;
 use App\Http\Controllers\V1\Auth\RefreshController;
 use App\Http\Controllers\V1\Auth\RegistrationController;
+use App\Http\Controllers\V1\StatementController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,5 +24,13 @@ Route::prefix('v1')->group(function () {
         Route::post('/login', [AuthController::class, 'auth']);
         Route::post('/logout', [LogoutController::class, 'logout']);
         Route::post('/refresh', [RefreshController::class, 'refresh']);
+    });
+
+    Route::middleware('auth:api')->group(function () {
+//        Route::prefix('/statement')->group(function () {
+//            Route::post('/add/to/event/{id}', [EventController::class, 'addToEvent']);
+//            Route::post('/remove/from/event/{id}', [EventController::class, 'removeFormEvent']);
+//        });
+        Route::apiResource('/statement', StatementController::class);
     });
 });
