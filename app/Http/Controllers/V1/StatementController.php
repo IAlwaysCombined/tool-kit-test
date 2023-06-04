@@ -2,22 +2,24 @@
 
 namespace App\Http\Controllers\V1;
 
+use App\Contracts\StatementContract;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StatementRequest;
 use App\Http\Resources\StatementResource;
 use App\Models\Statement;
 use App\Services\StatementService;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class StatementController extends Controller
 {
-    private StatementService $statementService;
+    private StatementContract $statementContract;
 
-    public function __construct(StatementService $statementService)
+    public function __construct(StatementContract $statementContract)
     {
-        $this->statementService = $statementService;
-        //$this->authorizeResource(Statement::class, 'statement');
+        $this->statementContract = $statementContract;
+        $this->authorizeResource(Statement::class, 'statement');
     }
 
     /**
@@ -25,7 +27,7 @@ class StatementController extends Controller
      */
     public function index(): AnonymousResourceCollection
     {
-        return $this->statementService->index();
+        return $this->statementContract->index();
     }
 
     /**
@@ -33,30 +35,30 @@ class StatementController extends Controller
      */
     public function store(StatementRequest $request): StatementResource
     {
-        return $this->statementService->create($request);
+        return $this->statementContract->create($request);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(int $id)
+    public function show(Statement $statement): StatementResource
     {
-        //
+        return $this->statementContract->view($statement);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, int $id)
+    public function update(Statement $statement): bool|int
     {
-        //
+        return $this->statementContract->update($statement);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(int $id)
+    public function destroy(Statement $statement): mixed
     {
-        //
+        return $this->statementContract->delete($statement);
     }
 }

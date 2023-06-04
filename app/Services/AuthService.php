@@ -53,6 +53,7 @@ class AuthService
             $this->user->save();
 
             $this->client->fill($request->all());
+            $this->client->user_id = $this->user->id;
             $this->client->save();
 
             $this->userRole->role_id = self::USER_ROLE;
