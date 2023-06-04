@@ -12,6 +12,11 @@ use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
+/**
+ * @OA\Info(
+ *
+ * )
+ */
 class StatementController extends Controller
 {
     private StatementContract $statementContract;
@@ -24,6 +29,25 @@ class StatementController extends Controller
 
     /**
      * Display a listing of the resource.
+     *
+     * @OA\Get(
+     *     path="/statement",
+     *     summary="Get statements list",
+     *     tags={"Statment"},
+     *     @OA\RequestBody(
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 example={"name": "Name", "number": "1235", "file": "C://file.txt"}
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="OK"
+     *     )
+     * )
+     *
      */
     public function index(): AnonymousResourceCollection
     {
@@ -32,6 +56,36 @@ class StatementController extends Controller
 
     /**
      * Store a newly created resource in storage.
+     *
+     * @OA\Post(
+     *     path="/statement",
+     *     summary="Add statement",
+     *     @OA\RequestBody(
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 @OA\Property(
+     *                     property="name",
+     *                     type="string"
+     *                 ),
+     *                 @OA\Property(
+     *                     property="number",
+     *                     type="integer"
+     *                 ),
+     *                 @OA\Property(
+     *                     property="file",
+     *                     type="string"
+     *                 ),
+     *                 example={"name": "Name", "number": "1235", "file": "C://file.txt"}
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="OK"
+     *     )
+     * )
+     *
      */
     public function store(StatementRequest $request): StatementResource
     {
@@ -40,6 +94,23 @@ class StatementController extends Controller
 
     /**
      * Display the specified resource.
+     *
+     * @OA\Get(
+     *     path="/statement/{id}",
+     *     summary="Get statement by id",
+     *     @OA\RequestBody(
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 example={"name": "Name", "number": "1235", "file": "C://file.txt"}
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="OK"
+     *     )
+     * )
      */
     public function show(Statement $statement): StatementResource
     {
@@ -48,6 +119,23 @@ class StatementController extends Controller
 
     /**
      * Update the specified resource in storage.
+     *
+     * @OA\Put(
+     *     path="/statement/{id}",
+     *     summary="Update statment by id",
+     *     @OA\RequestBody(
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 example={"name": "Name", "number": "1235", "file": "C://file.txt"}
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="OK"
+     *     )
+     * )
      */
     public function update(Statement $statement): bool|int
     {
@@ -56,6 +144,23 @@ class StatementController extends Controller
 
     /**
      * Remove the specified resource from storage.
+     *
+     * @OA\Delete(
+     *     path="/statement/{id}",
+     *     summary="Delete statment by id",
+     *     @OA\RequestBody(
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 example={"name": "Name", "number": "1235", "file": "C://file.txt"}
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="OK"
+     *     )
+     * )
      */
     public function destroy(Statement $statement): mixed
     {

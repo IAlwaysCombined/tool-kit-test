@@ -1,0 +1,156 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Tool kit test",
+        "version": "1.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost/api",
+            "description": "Laravel Swagger API server"
+        }
+    ],
+    "paths": {
+        "/api": {},
+        "/statement": {
+            "get": {
+                "summary": "Get statements list",
+                "description": "Display a listing of the resource.",
+                "operationId": "964bbce3fdc7a1a5fbb6bbffe4841b11",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "example": {
+                                    "name": "Name",
+                                    "number": "1235",
+                                    "file": "C://file.txt"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            },
+            "post": {
+                "summary": "Add statement",
+                "description": "Store a newly created resource in storage.",
+                "operationId": "853f40f656279f346e03e6ecc9ff3e75",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "number": {
+                                        "type": "integer"
+                                    },
+                                    "file": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "name": "Name",
+                                    "number": "1235",
+                                    "file": "C://file.txt"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/statement/{id}": {
+            "get": {
+                "summary": "Get statement by id",
+                "description": "Display the specified resource.",
+                "operationId": "0d2dec94bda25fa9743d6f4cdba0475c",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "example": {
+                                    "name": "Name",
+                                    "number": "1235",
+                                    "file": "C://file.txt"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            },
+            "put": {
+                "summary": "Update statment by id",
+                "description": "Update the specified resource in storage.",
+                "operationId": "b6258ebc7134dbcd228181fa1b76b58c",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "example": {
+                                    "name": "Name",
+                                    "number": "1235",
+                                    "file": "C://file.txt"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete statment by id",
+                "description": "Remove the specified resource from storage.",
+                "operationId": "b041c60d442a109668337a38fe51e786",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "example": {
+                                    "name": "Name",
+                                    "number": "1235",
+                                    "file": "C://file.txt"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "X-APP-ID": {
+                "type": "apiKey",
+                "name": "X-APP-ID",
+                "in": "header"
+            }
+        }
+    }
+}
