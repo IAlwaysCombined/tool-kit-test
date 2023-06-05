@@ -14,6 +14,9 @@
         "/api": {},
         "/statement": {
             "get": {
+                "tags": [
+                    "Statment"
+                ],
                 "summary": "Get statements list",
                 "description": "Display a listing of the resource.",
                 "operationId": "964bbce3fdc7a1a5fbb6bbffe4841b11",
@@ -37,6 +40,9 @@
                 }
             },
             "post": {
+                "tags": [
+                    "Statment"
+                ],
                 "summary": "Add statement",
                 "description": "Store a newly created resource in storage.",
                 "operationId": "853f40f656279f346e03e6ecc9ff3e75",
@@ -74,6 +80,9 @@
         },
         "/statement/{id}": {
             "get": {
+                "tags": [
+                    "Statment"
+                ],
                 "summary": "Get statement by id",
                 "description": "Display the specified resource.",
                 "operationId": "0d2dec94bda25fa9743d6f4cdba0475c",
@@ -97,6 +106,9 @@
                 }
             },
             "put": {
+                "tags": [
+                    "Statment"
+                ],
                 "summary": "Update statment by id",
                 "description": "Update the specified resource in storage.",
                 "operationId": "b6258ebc7134dbcd228181fa1b76b58c",
@@ -120,6 +132,9 @@
                 }
             },
             "delete": {
+                "tags": [
+                    "Statment"
+                ],
                 "summary": "Delete statment by id",
                 "description": "Remove the specified resource from storage.",
                 "operationId": "b041c60d442a109668337a38fe51e786",

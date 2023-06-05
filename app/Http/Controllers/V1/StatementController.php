@@ -7,16 +7,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StatementRequest;
 use App\Http\Resources\StatementResource;
 use App\Models\Statement;
-use App\Services\StatementService;
-use Illuminate\Auth\Access\AuthorizationException;
-use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use OpenApi\Annotations as OA;
 
-/**
- * @OA\Info(
- *
- * )
- */
 class StatementController extends Controller
 {
     private StatementContract $statementContract;
@@ -60,6 +53,7 @@ class StatementController extends Controller
      * @OA\Post(
      *     path="/statement",
      *     summary="Add statement",
+     *     tags={"Statment"},
      *     @OA\RequestBody(
      *         @OA\MediaType(
      *             mediaType="application/json",
@@ -98,6 +92,7 @@ class StatementController extends Controller
      * @OA\Get(
      *     path="/statement/{id}",
      *     summary="Get statement by id",
+     *     tags={"Statment"},
      *     @OA\RequestBody(
      *         @OA\MediaType(
      *             mediaType="application/json",
@@ -123,6 +118,7 @@ class StatementController extends Controller
      * @OA\Put(
      *     path="/statement/{id}",
      *     summary="Update statment by id",
+     *     tags={"Statment"},
      *     @OA\RequestBody(
      *         @OA\MediaType(
      *             mediaType="application/json",
@@ -137,9 +133,9 @@ class StatementController extends Controller
      *     )
      * )
      */
-    public function update(Statement $statement): bool|int
+    public function update(Statement $statement, StatementRequest $request): bool|int
     {
-        return $this->statementContract->update($statement);
+        return $this->statementContract->update($statement, $request);
     }
 
     /**
@@ -148,6 +144,7 @@ class StatementController extends Controller
      * @OA\Delete(
      *     path="/statement/{id}",
      *     summary="Delete statment by id",
+     *     tags={"Statment"},
      *     @OA\RequestBody(
      *         @OA\MediaType(
      *             mediaType="application/json",

@@ -2,13 +2,12 @@
 
 namespace App\Services;
 
+use App\Enums\Roles;
 use App\Http\Requests\AuthRequest;
 use App\Http\Requests\RegistrationRequest;
 use App\Http\Resources\TokenResource;
 use App\Models\Client;
 use App\Models\User;
-use App\Models\UserRole;
-use Closure;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
@@ -17,15 +16,11 @@ class AuthService
 {
     private User $user;
     private Client $client;
-    private UserRole $userRole;
 
-    const USER_ROLE = 1;
-
-    public function __construct(User $user, Client $client, UserRole $userRole)
+    public function __construct(User $user, Client $client)
     {
         $this->user = $user;
         $this->client = $client;
-        $this->userRole = $userRole;
     }
 
     /**
@@ -50,15 +45,12 @@ class AuthService
         DB::beginTransaction();
         try {
             $this->user->fill($request->all());
+            $this->user->role = Roles::USER->value;
             $this->user->save();
 
             $this->client->fill($request->all());
             $this->client->user_id = $this->user->id;
             $this->client->save();
-
-            $this->userRole->role_id = self::USER_ROLE;
-            $this->userRole->user_id = $this->user->id;
-            $this->userRole->save();
 
             DB::commit();
         } catch (Exception $e) {

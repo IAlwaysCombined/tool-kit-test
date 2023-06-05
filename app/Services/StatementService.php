@@ -6,6 +6,7 @@ use App\Contracts\StatementContract;
 use App\Http\Requests\StatementRequest;
 use App\Http\Resources\StatementResource;
 use App\Models\Statement;
+use App\Models\User;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class StatementService implements StatementContract
@@ -34,19 +35,17 @@ class StatementService implements StatementContract
      */
     public function create(StatementRequest $request): StatementResource
     {
-        $this->statement->fill($request->all());
-        $this->statement->client_id = auth()->user()->getAuthIdentifier();
-        $this->statement->save();
-        return new StatementResource($this->statement);
+        return new StatementResource($this->statement::query()->create($request->all()));
     }
 
     /**
      * @param Statement $statement
+     * @param StatementRequest $request
      * @return bool|int
      */
-    public function update(Statement $statement): bool|int
+    public function update(Statement $statement, StatementRequest $request): bool|int
     {
-        return $statement->update();
+        return $statement->update($request->all());
     }
 
     /**

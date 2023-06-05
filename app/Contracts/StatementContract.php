@@ -15,7 +15,7 @@ interface StatementContract
 
     public function create(StatementRequest $request): StatementResource;
 
-    public function update(Statement $statement): bool|int;
+    public function update(Statement $statement, StatementRequest $request): bool|int;
 
     public function delete(Statement $statement): mixed;
 }

@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
+use Barryvdh\LaravelIdeHelper\Eloquent;
 use Database\Factories\StatementFactory;
-use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -42,4 +42,14 @@ class Statement extends Model
         'file',
         'client_id',
     ];
+
+    /**
+     * @return void
+     */
+    protected static function booted(): void
+    {
+        static::creating(function ($model) {
+            $model->client_id = auth()->user()->getAuthIdentifier();
+        });
+    }
 }

@@ -2,17 +2,18 @@
 
 namespace App\Policies;
 
-use App\Models\Client;
+use App\Enums\Roles;
 use App\Models\Statement;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class StatementPolice
+class StatementPolicy
 {
     use HandlesAuthorization;
 
     /**
-     * Determine whether the user can view any models.
+     * @param User $user
+     * @return bool
      */
     public function viewAny(User $user): bool
     {
@@ -20,7 +21,8 @@ class StatementPolice
     }
 
     /**
-     * Determine whether the user can view the model.
+     * @param User $user
+     * @return bool
      */
     public function view(User $user): bool
     {
@@ -28,7 +30,8 @@ class StatementPolice
     }
 
     /**
-     * Determine whether the user can create models.
+     * @param User $user
+     * @return bool
      */
     public function create(User $user): bool
     {
@@ -36,18 +39,28 @@ class StatementPolice
     }
 
     /**
-     * Determine whether the user can update the model.
+     * @param User $user
+     * @param Statement $statement
+     * @return bool
      */
     public function update(User $user, Statement $statement): bool
     {
+        if ($user->role === Roles::ADMIN->value){
+            return true;
+        }
         return $user->id === $statement->client_id;
     }
 
     /**
-     * Determine whether the user can delete the model.
+     * @param User $user
+     * @param Statement $statement
+     * @return bool
      */
     public function delete(User $user, Statement $statement): bool
     {
+        if ($user->role === Roles::ADMIN->value){
+            return true;
+        }
         return $user->id === $statement->client_id;
     }
 }
