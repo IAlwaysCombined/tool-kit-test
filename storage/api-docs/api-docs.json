@@ -7,27 +7,35 @@
     "servers": [
         {
             "url": "http://localhost/api",
-            "description": "Laravel Swagger API server"
+            "description": "Laravel Swagger API server for Tool kit test"
         }
     ],
     "paths": {
         "/api": {},
-        "/statement": {
-            "get": {
+        "/v1/auth/login": {
+            "post": {
                 "tags": [
-                    "Statment"
+                    "Auth"
                 ],
-                "summary": "Get statements list",
-                "description": "Display a listing of the resource.",
-                "operationId": "964bbce3fdc7a1a5fbb6bbffe4841b11",
+                "summary": "Auth user",
+                "description": "Auth users",
+                "operationId": "7f7ee36c4776c58183ce95c651310e11",
                 "requestBody": {
                     "content": {
                         "application/json": {
                             "schema": {
+                                "properties": {
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object",
                                 "example": {
-                                    "name": "Name",
-                                    "number": "1235",
-                                    "file": "C://file.txt"
+                                    "email": "example@mail.ru",
+                                    "password": "1235"
                                 }
                             }
                         }
@@ -38,6 +46,105 @@
                         "description": "OK"
                     }
                 }
+            }
+        },
+        "/v1/auth/logout": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Logout",
+                "description": "Logout",
+                "operationId": "e7eb65de3f9c881e32bded41ee971e77",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/v1/auth/refresh": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Refresh token",
+                "description": "Refresh token",
+                "operationId": "59a5c113caf93287a81a95ffba8d982c",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/v1/auth/registration": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Registration user",
+                "description": "Registration users",
+                "operationId": "d9bedfca4284c126e71faec66247c00b",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    },
+                                    "address": {
+                                        "type": "string"
+                                    },
+                                    "phone": {
+                                        "type": "string"
+                                    },
+                                    "birthday": {
+                                        "type": "string",
+                                        "format": "date-time"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "email": "example@mail.ru",
+                                    "password": "1235",
+                                    "address": "Moscow",
+                                    "phone": "+79999999999",
+                                    "birthday": "2023-06-03 23:32:17"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/v1/statement": {
+            "get": {
+                "tags": [
+                    "Statment"
+                ],
+                "summary": "Get statements list",
+                "description": "Display a listing of the resource.",
+                "operationId": "cb1090f5b6212c8f9bd9ce76e55fe12f",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             },
             "post": {
                 "tags": [
@@ -45,7 +152,7 @@
                 ],
                 "summary": "Add statement",
                 "description": "Store a newly created resource in storage.",
-                "operationId": "853f40f656279f346e03e6ecc9ff3e75",
+                "operationId": "527f12a5957b7bc8c99d0db0d1f54bce",
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -75,35 +182,32 @@
                     "200": {
                         "description": "OK"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             }
         },
-        "/statement/{id}": {
+        "/v1/statement/{id}": {
             "get": {
                 "tags": [
                     "Statment"
                 ],
                 "summary": "Get statement by id",
                 "description": "Display the specified resource.",
-                "operationId": "0d2dec94bda25fa9743d6f4cdba0475c",
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "example": {
-                                    "name": "Name",
-                                    "number": "1235",
-                                    "file": "C://file.txt"
-                                }
-                            }
-                        }
-                    }
-                },
+                "operationId": "25896756304319ec0c001f9349fa91c1",
                 "responses": {
                     "200": {
                         "description": "OK"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             },
             "put": {
                 "tags": [
@@ -111,7 +215,7 @@
                 ],
                 "summary": "Update statment by id",
                 "description": "Update the specified resource in storage.",
-                "operationId": "b6258ebc7134dbcd228181fa1b76b58c",
+                "operationId": "6c8f64a9c3ceb97607722623079e2c27",
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -129,7 +233,12 @@
                     "200": {
                         "description": "OK"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             },
             "delete": {
                 "tags": [
@@ -137,34 +246,35 @@
                 ],
                 "summary": "Delete statment by id",
                 "description": "Remove the specified resource from storage.",
-                "operationId": "b041c60d442a109668337a38fe51e786",
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "example": {
-                                    "name": "Name",
-                                    "number": "1235",
-                                    "file": "C://file.txt"
-                                }
-                            }
-                        }
+                "operationId": "25ad435d8d4083a3c408bf4fe42fc302",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": 15
                     }
-                },
+                ],
                 "responses": {
                     "200": {
                         "description": "OK"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             }
         }
     },
     "components": {
         "securitySchemes": {
-            "X-APP-ID": {
-                "type": "apiKey",
-                "name": "X-APP-ID",
-                "in": "header"
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer"
             }
         }
     }

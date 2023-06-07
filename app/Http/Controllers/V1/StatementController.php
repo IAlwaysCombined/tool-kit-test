@@ -24,21 +24,14 @@ class StatementController extends Controller
      * Display a listing of the resource.
      *
      * @OA\Get(
-     *     path="/statement",
+     *     path="/v1/statement",
      *     summary="Get statements list",
      *     tags={"Statment"},
-     *     @OA\RequestBody(
-     *         @OA\MediaType(
-     *             mediaType="application/json",
-     *             @OA\Schema(
-     *                 example={"name": "Name", "number": "1235", "file": "C://file.txt"}
-     *             )
-     *         )
-     *     ),
      *     @OA\Response(
      *         response=200,
      *         description="OK"
-     *     )
+     *     ),
+     *     security={{"bearerAuth":{}}}
      * )
      *
      */
@@ -51,7 +44,7 @@ class StatementController extends Controller
      * Store a newly created resource in storage.
      *
      * @OA\Post(
-     *     path="/statement",
+     *     path="/v1/statement",
      *     summary="Add statement",
      *     tags={"Statment"},
      *     @OA\RequestBody(
@@ -77,7 +70,8 @@ class StatementController extends Controller
      *     @OA\Response(
      *         response=200,
      *         description="OK"
-     *     )
+     *     ),
+     *     security={{"bearerAuth":{}}}
      * )
      *
      */
@@ -90,21 +84,22 @@ class StatementController extends Controller
      * Display the specified resource.
      *
      * @OA\Get(
-     *     path="/statement/{id}",
+     *     path="/v1/statement/{id}",
      *     summary="Get statement by id",
      *     tags={"Statment"},
-     *     @OA\RequestBody(
-     *         @OA\MediaType(
-     *             mediaType="application/json",
-     *             @OA\Schema(
-     *                 example={"name": "Name", "number": "1235", "file": "C://file.txt"}
-     *             )
-     *         )
+     *     @OA\Parameter(
+     *          name="id",
+     *          example=15,
+     *          in="path",
+     *              @OA\Schema(
+     *                  type="integer"
+     *          )
      *     ),
      *     @OA\Response(
      *         response=200,
      *         description="OK"
-     *     )
+     *     ),
+     *     security={{"bearerAuth":{}}}
      * )
      */
     public function show(Statement $statement): StatementResource
@@ -116,9 +111,17 @@ class StatementController extends Controller
      * Update the specified resource in storage.
      *
      * @OA\Put(
-     *     path="/statement/{id}",
+     *     path="/v1/statement/{id}",
      *     summary="Update statment by id",
      *     tags={"Statment"},
+     *     @OA\Parameter(
+     *          name="id",
+     *          example=15,
+     *          in="path",
+     *              @OA\Schema(
+     *                  type="integer"
+     *          )
+     *     ),
      *     @OA\RequestBody(
      *         @OA\MediaType(
      *             mediaType="application/json",
@@ -130,7 +133,8 @@ class StatementController extends Controller
      *     @OA\Response(
      *         response=200,
      *         description="OK"
-     *     )
+     *     ),
+     *     security={{"bearerAuth":{}}}
      * )
      */
     public function update(Statement $statement, StatementRequest $request): bool|int
@@ -142,21 +146,22 @@ class StatementController extends Controller
      * Remove the specified resource from storage.
      *
      * @OA\Delete(
-     *     path="/statement/{id}",
+     *     path="/v1/statement/{id}",
      *     summary="Delete statment by id",
      *     tags={"Statment"},
-     *     @OA\RequestBody(
-     *         @OA\MediaType(
-     *             mediaType="application/json",
-     *             @OA\Schema(
-     *                 example={"name": "Name", "number": "1235", "file": "C://file.txt"}
-     *             )
-     *         )
+     *     @OA\Parameter(
+     *          name="id",
+     *          example=15,
+     *          in="path",
+     *              @OA\Schema(
+     *                  type="integer"
+     *          )
      *     ),
      *     @OA\Response(
      *         response=200,
      *         description="OK"
-     *     )
+     *     ),
+     *     security={{"bearerAuth":{}}}
      * )
      */
     public function destroy(Statement $statement): mixed

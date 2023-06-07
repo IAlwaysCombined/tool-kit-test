@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
+use OpenApi\Annotations as OA;
 
 
 /**
@@ -13,14 +14,13 @@ use Illuminate\Routing\Controller as BaseController;
  *     title="Tool kit test"
  * )
  * @OA\Server(
- *     description="Laravel Swagger API server",
+ *     description="Laravel Swagger API server for Tool kit test",
  *     url="http://localhost/api"
  * )
  * @OA\SecurityScheme(
- *     type="apiKey",
- *     in="header",
- *     name="X-APP-ID",
- *     securityScheme="X-APP-ID"
+ *     securityScheme="bearerAuth",
+ *     type="http",
+ *     scheme="bearer",
  * )
  * @OA\PathItem(path="/api")
  */
