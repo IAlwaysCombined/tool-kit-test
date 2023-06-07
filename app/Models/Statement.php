@@ -42,14 +42,4 @@ class Statement extends Model
         'file',
         'client_id',
     ];
-
-    /**
-     * @return void
-     */
-    protected static function booted(): void
-    {
-        static::creating(function ($model) {
-            $model->client_id = auth()->user()->getAuthIdentifier();
-        });
-    }
 }
