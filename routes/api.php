@@ -27,10 +27,6 @@ Route::prefix('v1')->group(function () {
     });
 
     Route::middleware('auth:api')->group(function () {
-//        Route::prefix('/statement')->group(function () {
-//            Route::post('/add/to/event/{id}', [EventController::class, 'addToEvent']);
-//            Route::post('/remove/from/event/{id}', [EventController::class, 'removeFormEvent']);
-//        });
         Route::apiResource('/statement', StatementController::class);
     });
 });

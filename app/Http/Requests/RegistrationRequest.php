@@ -31,11 +31,11 @@ class RegistrationRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => 'required',
-            'password' => 'required',
-            'address' => 'required',
-            'phone' => 'required',
-            'birthday' => 'required',
+            'email' => ['required', 'email'],
+            'password' => ['required'],
+            'address' => ['required'],
+            'phone' => ['required'],
+            'birthday' => ['required', 'date'],
         ];
     }
 }
