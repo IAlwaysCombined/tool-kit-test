@@ -35,7 +35,11 @@ class StatementService implements StatementContract
      */
     public function create(StatementRequest $request): StatementResource
     {
-        return new StatementResource($this->statement::query()->create($request->all()));
+        $this->statement->fill($request->all());
+        $this->statement->client_id = auth()->user()->getAuthIdentifier();
+        $this->statement->save();
+
+        return new StatementResource($this->statement);
     }
 
     /**
